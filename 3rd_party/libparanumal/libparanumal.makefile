@@ -53,104 +53,169 @@ CFLAGS:= $(CFLAGS_) -D DHOLMES="\\\"$(NEKRS_INSTALL_DIR)/libparanumal\\\"" \
 	-D DPARALMOND="\\\"$(NEKRS_INSTALL_DIR)/parAlmond\\\""
 
 # list of objects to be compiled
-AOBJS    = \
-$(INSDIR)/src/insSetup.o \
-$(INSDIR)/src/insCurlCurl.o \
-$(INSDIR)/src/insPlotWallsVTUHex3D.o \
-$(INSDIR)/src/insPlotVTUHex3D.o \
-$(INSDIR)/src/insPlotVTU.o \
-$(INSDIR)/src/insForces.o \
-$(INSDIR)/src/insComputeDt.o \
-$(INSDIR)/src/insAdvection.o \
-$(INSDIR)/src/insDiffusion.o \
-$(INSDIR)/src/insGradient.o \
-$(INSDIR)/src/insDivergence.o \
-$(INSDIR)/src/insSubCycle.o \
-$(INSDIR)/src/insVelocityRhs.o \
-$(INSDIR)/src/insVelocitySolve.o \
-$(INSDIR)/src/insVelocityUpdate.o \
-$(INSDIR)/src/insPressureRhs.o \
-$(INSDIR)/src/insPressureSolve.o \
-$(INSDIR)/src/insPressureUpdate.o \
-$(INSDIR)/src/insWeldTriVerts.o \
-$(INSDIR)/src/insIsoPlotVTU.o \
-$(INSDIR)/src/insBrownMinionQuad3D.o \
-$(INSDIR)/src/insFilterSetup.o \
-$(INSDIR)/src/insComputeCfl.o
+AOBJS = \
+  $(INSDIR)/src/insSetup.o \
+  $(INSDIR)/src/insCurlCurl.o \
+  $(INSDIR)/src/insPlotWallsVTUHex3D.o \
+  $(INSDIR)/src/insPlotVTUHex3D.o \
+  $(INSDIR)/src/insPlotVTU.o \
+  $(INSDIR)/src/insForces.o \
+  $(INSDIR)/src/insComputeDt.o \
+  $(INSDIR)/src/insAdvection.o \
+  $(INSDIR)/src/insDiffusion.o \
+  $(INSDIR)/src/insGradient.o \
+  $(INSDIR)/src/insDivergence.o \
+  $(INSDIR)/src/insSubCycle.o \
+  $(INSDIR)/src/insVelocityRhs.o \
+  $(INSDIR)/src/insVelocitySolve.o \
+  $(INSDIR)/src/insVelocityUpdate.o \
+  $(INSDIR)/src/insPressureRhs.o \
+  $(INSDIR)/src/insPressureSolve.o \
+  $(INSDIR)/src/insPressureUpdate.o \
+  $(INSDIR)/src/insWeldTriVerts.o \
+  $(INSDIR)/src/insIsoPlotVTU.o \
+  $(INSDIR)/src/insBrownMinionQuad3D.o \
+  $(INSDIR)/src/insFilterSetup.o \
+  $(INSDIR)/src/insComputeCfl.o
+
+# list of objects to be compiled
+EOBJS = \
+  $(ELLIPTICDIR)/src/ellipticThinOas.o \
+  $(ELLIPTICDIR)/src/ellipticThinOasSetup.o \
+  $(ELLIPTICDIR)/src/ellipticZeroMean.o \
+  $(ELLIPTICDIR)/src/NBFPCG.o \
+  $(ELLIPTICDIR)/src/ellipticUpdateNBFPCG.o \
+  $(ELLIPTICDIR)/src/NBPCG.o \
+  $(ELLIPTICDIR)/src/ellipticUpdateNBPCG.o \
+  $(ELLIPTICDIR)/src/ellipticKernelInfo.o \
+  $(ELLIPTICDIR)/src/PCG.o \
+  $(ELLIPTICDIR)/src/PBiCGSTAB.o \
+  $(ELLIPTICDIR)/src/ellipticSerialAxHex3D.o \
+  $(ELLIPTICDIR)/src/ellipticSerialPartialAxHex3D.o \
+  $(ELLIPTICDIR)/src/ellipticPlotVTUHex3D.o \
+  $(ELLIPTICDIR)/src/ellipticBuildContinuous.o \
+  $(ELLIPTICDIR)/src/ellipticBuildIpdg.o \
+  $(ELLIPTICDIR)/src/ellipticBuildJacobi.o \
+  $(ELLIPTICDIR)/src/ellipticBuildLocalPatches.o \
+  $(ELLIPTICDIR)/src/ellipticBuildMultigridLevel.o \
+  $(ELLIPTICDIR)/src/ellipticHaloExchange.o\
+  $(ELLIPTICDIR)/src/ellipticOperator.o \
+  $(ELLIPTICDIR)/src/ellipticPreconditioner.o\
+  $(ELLIPTICDIR)/src/ellipticPreconditionerSetup.o\
+  $(ELLIPTICDIR)/src/ellipticSetup.o \
+  $(ELLIPTICDIR)/src/ellipticSolve.o\
+  $(ELLIPTICDIR)/src/ellipticSolveSetup.o\
+  $(ELLIPTICDIR)/src/ellipticScaledAdd.o \
+  $(ELLIPTICDIR)/src/ellipticSetScalar.o \
+  $(ELLIPTICDIR)/src/ellipticUpdatePCG.o \
+  $(ELLIPTICDIR)/src/ellipticWeightedInnerProduct.o \
+  $(ELLIPTICDIR)/src/ellipticWeightedNorm2.o \
+  $(ELLIPTICDIR)/src/ellipticVectors.o \
+  $(ELLIPTICDIR)/src/ellipticSEMFEMSetup.o\
+  $(ELLIPTICDIR)/src/ellipticMultiGridSetup.o \
+  $(ELLIPTICDIR)/src/ellipticMultiGridLevel.o \
+  $(ELLIPTICDIR)/src/ellipticMultiGridLevelSetup.o \
+
+# list of objects to be compiled
+OOBJS = \
+  $(OGSDIR)/src/ogsMappedAlloc.o \
+  $(OGSDIR)/src/ogsGatherScatter.o \
+  $(OGSDIR)/src/ogsGatherScatterVec.o \
+  $(OGSDIR)/src/ogsGatherScatterMany.o \
+  $(OGSDIR)/src/ogsGather.o \
+  $(OGSDIR)/src/ogsGatherVec.o \
+  $(OGSDIR)/src/ogsGatherMany.o \
+  $(OGSDIR)/src/ogsScatter.o \
+  $(OGSDIR)/src/ogsScatterVec.o \
+  $(OGSDIR)/src/ogsScatterMany.o \
+  $(OGSDIR)/src/ogsSetup.o \
+  $(OGSDIR)/src/ogsKernels.o
+
+OCOBJS = \
+  $(OGSDIR)/src/ogsHostGatherScatter.o \
+  $(OGSDIR)/src/ogsHostGatherScatterVec.o \
+  $(OGSDIR)/src/ogsHostGatherScatterMany.o \
+  $(OGSDIR)/src/ogsHostGather.o \
+  $(OGSDIR)/src/ogsHostGatherVec.o \
+  $(OGSDIR)/src/ogsHostGatherMany.o \
+  $(OGSDIR)/src/ogsHostScatter.o \
+  $(OGSDIR)/src/ogsHostScatterVec.o \
+  $(OGSDIR)/src/ogsHostScatterMany.o \
+  $(OGSDIR)/src/ogsHostSetup.o
 
 # library objects
 LOBJS = \
-$(HDRDIR)/src/meshConnectPeriodicFaceNodes3D.o \
-$(HDRDIR)/src/meshConnectPeriodicFaceNodes2D.o \
-$(HDRDIR)/src/meshSetupBoxHex3D.o \
-$(HDRDIR)/src/meshSetupBoxQuad2D.o \
-$(HDRDIR)/src/meshApplyElementMatrix.o \
-$(HDRDIR)/src/meshConnect.o \
-$(HDRDIR)/src/meshConnectFaceNodes2D.o \
-$(HDRDIR)/src/meshConnectFaceNodes3D.o \
-$(HDRDIR)/src/meshGeometricFactorsTet3D.o \
-$(HDRDIR)/src/meshGeometricFactorsHex3D.o \
-$(HDRDIR)/src/meshGeometricFactorsTri2D.o \
-$(HDRDIR)/src/meshGeometricFactorsTri3D.o \
-$(HDRDIR)/src/meshGeometricFactorsQuad2D.o \
-$(HDRDIR)/src/meshGeometricFactorsQuad3D.o \
-$(HDRDIR)/src/meshGeometricPartition2D.o \
-$(HDRDIR)/src/meshGeometricPartition3D.o \
-$(HDRDIR)/src/meshPartitionStatistics.o \
-$(HDRDIR)/src/meshHaloExchange.o \
-$(HDRDIR)/src/meshHaloExtract.o \
-$(HDRDIR)/src/meshHaloSetup.o \
-$(HDRDIR)/src/meshLoadReferenceNodesTri2D.o \
-$(HDRDIR)/src/meshLoadReferenceNodesQuad2D.o \
-$(HDRDIR)/src/meshLoadReferenceNodesTet3D.o \
-$(HDRDIR)/src/meshOccaSetup2D.o \
-$(HDRDIR)/src/meshOccaSetup3D.o \
-$(HDRDIR)/src/meshOccaSetupQuad3D.o \
-$(HDRDIR)/src/meshParallelConnectNodes.o \
-$(HDRDIR)/src/meshParallelConnectOpt.o \
-$(HDRDIR)/src/meshParallelConsecutiveGlobalNumbering.o\
-$(HDRDIR)/src/meshParallelGatherScatterSetup.o \
-$(HDRDIR)/src/meshParallelReaderTri2D.o \
-$(HDRDIR)/src/meshParallelReaderHex3D.o \
-$(HDRDIR)/src/meshParallelReaderTri3D.o \
-$(HDRDIR)/src/meshParallelReaderQuad2D.o \
-$(HDRDIR)/src/meshParallelReaderQuad3D.o \
-$(HDRDIR)/src/meshParallelReaderTet3D.o \
-$(HDRDIR)/src/meshPhysicalNodesTri2D.o \
-$(HDRDIR)/src/meshPhysicalNodesTri3D.o \
-$(HDRDIR)/src/meshPhysicalNodesQuad2D.o \
-$(HDRDIR)/src/meshPhysicalNodesQuad3D.o \
-$(HDRDIR)/src/meshPhysicalNodesTet3D.o \
-$(HDRDIR)/src/meshPlotVTU2D.o \
-$(HDRDIR)/src/meshPlotVTU3D.o \
-$(HDRDIR)/src/meshPrint2D.o \
-$(HDRDIR)/src/meshPrint3D.o \
-$(HDRDIR)/src/meshSetup.o \
-$(HDRDIR)/src/meshSetupTri2D.o \
-$(HDRDIR)/src/meshSetupTri3D.o \
-$(HDRDIR)/src/meshSetupQuad2D.o \
-$(HDRDIR)/src/meshSetupQuad3D.o \
-$(HDRDIR)/src/meshSetupHex3D.o \
-$(HDRDIR)/src/meshSetupTet3D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsTri2D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsTri3D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsQuad2D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsQuad3D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsTet3D.o \
-$(HDRDIR)/src/meshSurfaceGeometricFactorsHex3D.o \
-$(HDRDIR)/src/meshLoadReferenceNodesHex3D.o \
-$(HDRDIR)/src/meshConnectBoundary.o \
-$(HDRDIR)/src/meshVTU2D.o \
-$(HDRDIR)/src/meshVTU3D.o \
-$(HDRDIR)/src/matrixInverse.o \
-$(HDRDIR)/src/matrixConditionNumber.o \
-$(HDRDIR)/src/mysort.o \
-$(HDRDIR)/src/parallelSort.o\
-$(HDRDIR)/src/hash.o\
-$(HDRDIR)/src/setupAide.o \
-$(HDRDIR)/src/readArray.o\
-$(HDRDIR)/src/occaHostMallocPinned.o \
-$(HDRDIR)/src/timer.o
+  $(HDRDIR)/src/meshConnectPeriodicFaceNodes3D.o \
+  $(HDRDIR)/src/meshConnectPeriodicFaceNodes2D.o \
+  $(HDRDIR)/src/meshSetupBoxHex3D.o \
+  $(HDRDIR)/src/meshSetupBoxQuad2D.o \
+  $(HDRDIR)/src/meshApplyElementMatrix.o \
+  $(HDRDIR)/src/meshConnect.o \
+  $(HDRDIR)/src/meshConnectFaceNodes2D.o \
+  $(HDRDIR)/src/meshConnectFaceNodes3D.o \
+  $(HDRDIR)/src/meshGeometricFactorsTet3D.o \
+  $(HDRDIR)/src/meshGeometricFactorsHex3D.o \
+  $(HDRDIR)/src/meshGeometricFactorsTri2D.o \
+  $(HDRDIR)/src/meshGeometricFactorsTri3D.o \
+  $(HDRDIR)/src/meshGeometricFactorsQuad2D.o \
+  $(HDRDIR)/src/meshGeometricFactorsQuad3D.o \
+  $(HDRDIR)/src/meshGeometricPartition2D.o \
+  $(HDRDIR)/src/meshGeometricPartition3D.o \
+  $(HDRDIR)/src/meshPartitionStatistics.o \
+  $(HDRDIR)/src/meshHaloExchange.o \
+  $(HDRDIR)/src/meshHaloExtract.o \
+  $(HDRDIR)/src/meshHaloSetup.o \
+  $(HDRDIR)/src/meshLoadReferenceNodesTri2D.o \
+  $(HDRDIR)/src/meshLoadReferenceNodesQuad2D.o \
+  $(HDRDIR)/src/meshLoadReferenceNodesTet3D.o \
+  $(HDRDIR)/src/meshOccaSetup2D.o \
+  $(HDRDIR)/src/meshOccaSetup3D.o \
+  $(HDRDIR)/src/meshOccaSetupQuad3D.o \
+  $(HDRDIR)/src/meshParallelConnectNodes.o \
+  $(HDRDIR)/src/meshParallelConnectOpt.o \
+  $(HDRDIR)/src/meshParallelConsecutiveGlobalNumbering.o\
+  $(HDRDIR)/src/meshParallelGatherScatterSetup.o \
+  $(HDRDIR)/src/meshParallelReaderTri2D.o \
+  $(HDRDIR)/src/meshParallelReaderHex3D.o \
+  $(HDRDIR)/src/meshParallelReaderTri3D.o \
+  $(HDRDIR)/src/meshParallelReaderQuad2D.o \
+  $(HDRDIR)/src/meshParallelReaderQuad3D.o \
+  $(HDRDIR)/src/meshParallelReaderTet3D.o \
+  $(HDRDIR)/src/meshPhysicalNodesTri2D.o \
+  $(HDRDIR)/src/meshPhysicalNodesTri3D.o \
+  $(HDRDIR)/src/meshPhysicalNodesQuad2D.o \
+  $(HDRDIR)/src/meshPhysicalNodesQuad3D.o \
+  $(HDRDIR)/src/meshPhysicalNodesTet3D.o \
+  $(HDRDIR)/src/meshPlotVTU2D.o \
+  $(HDRDIR)/src/meshPlotVTU3D.o \
+  $(HDRDIR)/src/meshPrint2D.o \
+  $(HDRDIR)/src/meshPrint3D.o \
+  $(HDRDIR)/src/meshSetup.o \
+  $(HDRDIR)/src/meshSetupTri2D.o \
+  $(HDRDIR)/src/meshSetupTri3D.o \
+  $(HDRDIR)/src/meshSetupQuad2D.o \
+  $(HDRDIR)/src/meshSetupQuad3D.o \
+  $(HDRDIR)/src/meshSetupHex3D.o \
+  $(HDRDIR)/src/meshSetupTet3D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsTri2D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsTri3D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsQuad2D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsQuad3D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsTet3D.o \
+  $(HDRDIR)/src/meshSurfaceGeometricFactorsHex3D.o \
+  $(HDRDIR)/src/meshLoadReferenceNodesHex3D.o \
+  $(HDRDIR)/src/meshConnectBoundary.o \
+  $(HDRDIR)/src/meshVTU2D.o \
+  $(HDRDIR)/src/meshVTU3D.o \
+  $(HDRDIR)/src/matrixInverse.o \
+  $(HDRDIR)/src/matrixConditionNumber.o \
+  $(HDRDIR)/src/mysort.o \
+  $(HDRDIR)/src/parallelSort.o\
+  $(HDRDIR)/src/hash.o\
+  $(HDRDIR)/src/setupAide.o \
+  $(HDRDIR)/src/readArray.o\
+  $(HDRDIR)/src/occaHostMallocPinned.o \
+  $(HDRDIR)/src/timer.o
 
 ifeq ($(OS),Windows_NT)
     detected_OS := Windows
@@ -180,7 +245,8 @@ ifeq ($(detected_OS),Darwin)
 endif
 
 libins: libelliptic $(AOBJS)
-	cd $(INSDIR) && $(CXX) $(SHARED) -o libins.$(EXT) $(AOBJS) -Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/ins/libins.$(EXT) \
+	cd $(INSDIR) && $(CXX) $(SHARED) -o libins.$(EXT) $(AOBJS) \ 
+	  -Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/ins/libins.$(EXT) \
     -Wl,-rpath,$(NEKRS_INSTALL_DIR)/ins -L$(ELLIPTICDIR) -lelliptic \
     -Wl,-rpath,$(NEKRS_INSTALL_DIR)/parAlmond  -L$(ALMONDDIR) -lparAlmond \
     -Wl,-rpath,$(NEKRS_INSTALL_DIR)/libparanumal -L$(HDRDIR) -lP \
@@ -188,24 +254,28 @@ libins: libelliptic $(AOBJS)
     -Wl,-rpath,$(NEKRS_INSTALL_DIR)/BlasLapack -L$(BLASDIR) -lBlasLapack
 
 libelliptic: libogs libP libparAlmond
-	$(MAKE) -C $(ELLIPTICDIR) cc="$(CC)" FC="$(FC)" CC="$(CXX)" LD="$(CXX)" \
-	  CFLAGS="$(CFLAGS)" GSDIR="$(GSDIR)" LDFLAGS="$(LDFLAGS)" sharedlib
+	cd $(ELLIPTICDIR) && $(LD) $(SHARED) -o libelliptic.$(EXT) $(EOBJS) \
+		-Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/elliptic/libelliptic.$(EXT)
 
 libP: libblas libogs $(LOBJS)
 	cd $(HDRDIR) && $(CXX) $(SHARED) -o libP.$(EXT) $(LOBJS) -Wl,$(WHOLE) \
-        -L$(BLASDIR) -lBlasLapack -Wl,$(NOWHOLE) -Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/libparanumal/libP.$(EXT)
+    -L$(BLASDIR) -lBlasLapack -Wl,$(NOWHOLE) \
+    -Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/libparanumal/libP.$(EXT)
 
 libogs:
 	$(MAKE) -C $(OGSDIR) CC="$(CC)" CXX="$(CXX)" LD="$(CXX)" \
-	  CFLAGS="$(CFLAGS)" GSDIR="$(GSDIR)" LDFLAGS="$(LDFLAGS)" sharedlib
+	  CFLAGS="$(CFLAGS)" GSDIR="$(GSDIR)" LDFLAGS="$(LDFLAGS)" lib
+	cd $(OGSDIR) && $(CXX) $(SHARED) -o libogs.$(EXT) $(OOBJS) \
+		$(OCOBJS) -Wl,$(WHOLE) -L$(GSDIR)/lib -lgs -Wl,$(NOWHOLE) \
+		-Wl,$(SONAME),$(NEKRS_INSTALL_DIR)/gatherScatter/libogs.$(EXT)
 
 libblas:
 	$(MAKE) -C $(BLASDIR) FC="$(FC)" FCFLAGS="$(FFLAGS)" lib
 
 libparAlmond:
 	$(MAKE) -C $(ALMONDDIR) CC="$(CC)" CXX="$(CXX)" LD="$(CXX)" \
-	  CFLAGS="$(CFLAGS)" GSDIR="$(GSDIR)" LDFLAGS="$(LDFLAGS)" ENABLE_HYPRE="$(ENABLE_HYPRE)" lib
-
+	  CFLAGS="$(CFLAGS)" GSDIR="$(GSDIR)" LDFLAGS="$(LDFLAGS)" \
+		ENABLE_HYPRE="$(ENABLE_HYPRE)" lib
 
 all: libins
 
