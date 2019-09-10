@@ -17,7 +17,7 @@ OCCA_GIT_URL=https://github.com/libocca/occa.git
 
 LIBP_VER=1.0 # latest
 LIBP_GIT_BRANCH=cds
-LIBP_GIT_URL=https://gitlab.com/nekrs/libparanumal.git
+LIBP_GIT_URL=https://github.com/AliKarakus/libparanumal.git
 
 HYPRE_VER=2.17.0
 HYPRE_ARCHIVE_URL=https://github.com/hypre-space/hypre/archive/v${HYPRE_VER}.tar.gz
