@@ -259,6 +259,7 @@ set(SRC src/nekrs.cpp
     src/report.cpp
     src/nekInterface/nekInterfaceAdapter.cpp
     src/parReader.cpp
+    src/nekrsInsSetup.cpp
     ## To get fortran flags
     src/dummy.f
 )

@@ -18,6 +18,7 @@ static string to_string_f(double a) {
 void runPlan4(ins_t *ins);
 void restartRead(ins_t *ins, setupAide &options);
 void report(ins_t *ins, dfloat time, int tstep);
+libParanumal::ins_t *nekrsInsSetup(mesh_t *mesh, setupAide &options);
 
 libParanumal::setupAide parRead(std::string &setupFile, MPI_Comm comm); 
 

@@ -319,8 +319,10 @@ int main(int argc, char **argv)
   mesh->rank = rank;
   mesh->size = size;
   meshNekSetupHex3D(N, mesh);
-  libParanumal::ins_t *ins = insSetup(mesh, options);
+  // libParanumal::ins_t *ins = insSetup(mesh, options);
 
+  // Add new setup
+  libParanumal::ins_t *ins = nekrsInsSetup(mesh, options);
   // jit compile udf kernels
   if (udf.loadKernels) {
     if (rank == 0) cout << "building udf kernels ...";
