@@ -1,10 +1,10 @@
-// void insFlowField3D(bcData *bc) 
-//   {                                  
-//     bc->uP = 1.f;  
-//     bc->vP = 0.f;                   
-//     bc->wP = 0.f;                    
-//     bc->pP = 0.f;                   
-//   }   
+void insFlowField3D(bcData *bc) 
+  {                                  
+    bc->uP = 1.f;  
+    bc->vP = 0.f;                   
+    bc->wP = 0.f;                    
+    bc->pP = 0.f;                   
+  }   
 
 // Boundary conditions
 /* wall 1, inflow 2, outflow 3, x-slip 4, y-slip 5, z-slip 6 */
@@ -40,9 +40,9 @@ void insPressureDirichletConditions3D(bcData *bc)
   } 
 }
 
-// void insPressureNeumannConditions3D(bcData *bc)
-// {                                          
-// }
+void insPressureNeumannConditions3D(bcData *bc)
+{                                          
+}
 
 // Initial conditions 
 void cdsScalarField3D(bcData *bc) {                               
