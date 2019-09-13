@@ -18,7 +18,8 @@ static string to_string_f(double a) {
 void runPlan4(ins_t *ins);
 void restartRead(ins_t *ins, setupAide &options);
 void report(ins_t *ins, dfloat time, int tstep);
-libParanumal::ins_t *nekrsInsSetup(mesh_t *mesh, setupAide &options);
+ins_t *nekrsInsSetup(mesh_t *mesh, setupAide &options);
+void nekrsInsSetScalarSolver(ins_t *ins, setupAide &options, occa::properties &kernelInfo);
 
 libParanumal::setupAide parRead(std::string &setupFile, MPI_Comm comm); 
 

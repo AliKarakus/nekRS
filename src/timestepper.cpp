@@ -95,6 +95,7 @@ void extbdfCoefficents(ins_t *ins, int order) {
 void runPlan4(ins_t *ins){
 
   mesh_t *mesh = ins->mesh;
+  cds_t *cds = ins->sSolver; 
 
   double time0 = MPI_Wtime();
   for(int tstep=0;tstep<ins->NtimeSteps;++tstep){
@@ -109,6 +110,10 @@ void runPlan4(ins_t *ins){
     dfloat time = ins->startTime + tstep*ins->dt;
 
     dlong offset = mesh->Np*(mesh->Nelements+mesh->totalHaloPairs);
+
+    //  // scalar solver step
+    // if(ins->Nscalar)
+    //   cdsSolveStep(cds, time, ins->dt, cds->o_U, cds->o_S); 
 
     if(ins->Nsubsteps) {
       libParanumal::insStrongSubCycle(ins, time, ins->Nstages, ins->o_U, ins->o_NU);
@@ -165,9 +170,14 @@ void runPlan4(ins_t *ins){
     }
 
     dfloat cfl = insComputeCfl(ins, time+ins->dt, tstep+1);
-    if (mesh->rank==0)
+    if (mesh->rank==0){
+      if(ins->Nscalar)
+        printf("tstep = %d, time = %.5e, cfl = %.2f, iter: U - %3d, V - %3d, W - %3d, P - %3d,  S - %3d, elapsed = %.5e s\n",
+        tstep+1, time+ins->dt, cfl, ins->NiterU, ins->NiterV, ins->NiterW, ins->NiterP, cds->Niter, MPI_Wtime()-time0);
+      else
       printf("tstep = %d, time = %.5e, cfl = %.2f, iter: U - %3d, V - %3d, W - %3d, P - %3d, elapsed = %.5e s\n",
         tstep+1, time+ins->dt, cfl, ins->NiterU, ins->NiterV, ins->NiterW, ins->NiterP, MPI_Wtime()-time0);
+    }
 
     if (ins->outputStep > 0)
       if (((tstep+1)%(ins->outputStep))==0  ||  tstep+1 == ins->NtimeSteps)

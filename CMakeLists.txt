@@ -260,6 +260,7 @@ set(SRC src/nekrs.cpp
     src/nekInterface/nekInterfaceAdapter.cpp
     src/parReader.cpp
     src/nekrsInsSetup.cpp
+    src/nekrsInsSetScalarSolver.cpp
     ## To get fortran flags
     src/dummy.f
 )

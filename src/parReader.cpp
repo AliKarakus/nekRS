@@ -40,6 +40,11 @@ void setDefaultSettings(libParanumal::setupAide &options, string casename, int r
   options.setArgs("VELOCITY PRECONDITIONER", "JACOBI");
   options.setArgs("VELOCITY DISCRETIZATION", "CONTINUOUS");
 
+  options.setArgs("SCALAR KRYLOV SOLVER", "PCG");
+  options.setArgs("SCALAR BASIS", "NODAL");
+  options.setArgs("SCALAR PRECONDITIONER", "JACOBI");
+  options.setArgs("SCALAR DISCRETIZATION", "CONTINUOUS");
+
   options.setArgs("ELLIPTIC INTEGRATION", "NODAL");
   options.setArgs("MAXIMUM ITERATIONS", "200");
   options.setArgs("FIXED ITERATION COUNT", "FALSE");
@@ -167,6 +172,8 @@ libParanumal::setupAide parRead(std::string &setupFile, MPI_Comm comm)
       int subCycles = round(targetCFL/2);
       options.setArgs("SUBCYCLING STEPS", std::to_string(subCycles));
       options.setArgs("DT", to_string_f(dt/subCycles));
+      int Sorder = 4; // Defaulting to LSERK 4(5); could be 2, 3, or 4  
+      options.setArgs("SUBCYCLING TIME ORDER", std::to_string(Sorder));
     } else {
       ABORT("Cannot find mandatory parameter GENERAL::targetCFL!"); 
     }
@@ -263,8 +270,23 @@ libParanumal::setupAide parRead(std::string &setupFile, MPI_Comm comm)
   if(ini.extract("problemtype", "equation", equation))
     if(equation != "incompNS") ABORT("Only PROBLEMTYPE::equation = incompNS is supported!");
 
-  if(ini.sections.count("temperature"))
-    ABORT("No support for temperature yet!");
+  if(ini.sections.count("temperature")){
+     double diffusivity = 0.0; 
+     int nscalar =1; 
+     if(ini.extract("temperature", "conductivity", diffusivity)){
+      if(diffusivity < 0) diffusivity = abs(1/diffusivity);
+       options.setArgs("DIFFUSIVITY", to_string_f(diffusivity));
+       options.setArgs("NUMBER of SCALAR FIELD", std::to_string(nscalar)); 
+     }else{
+      ABORT("Cannot find mandatory parameter TEMPERATURE::conductivity!"); 
+     } 
+
+    double t_residualTol;
+    if(ini.extract("temperature", "residualtol", t_residualTol))
+      options.setArgs("SCALAR SOLVER TOLERANCE", to_string_f(t_residualTol));
+    else
+      ABORT("Cannot find mandatory parameter TEMPERATURE::residualTol!"); 
+  }
   if(ini.sections.count("scalar01"))
     ABORT("No support for scalars yet!");
  
